@@ -309,6 +309,7 @@ class DetInferencer(BaseInferencer):
             print_result: bool = False,
             no_save_pred: bool = True,
             out_dir: str = '',
+            out_img_name: str = '',
             # by open image task
             texts: Optional[Union[str, list]] = None,
             # by open panoptic task
@@ -411,6 +412,7 @@ class DetInferencer(BaseInferencer):
                 pred_score_thr=pred_score_thr,
                 no_save_vis=no_save_vis,
                 img_out_dir=out_dir,
+                out_img_name=out_img_name,
                 **visualize_kwargs)
             results = self.postprocess(
                 preds,
@@ -435,6 +437,7 @@ class DetInferencer(BaseInferencer):
                   pred_score_thr: float = 0.3,
                   no_save_vis: bool = False,
                   img_out_dir: str = '',
+                  out_img_name: str = '',
                   **kwargs) -> Union[List[np.ndarray], None]:
         """Visualize predictions.
 
@@ -454,6 +457,8 @@ class DetInferencer(BaseInferencer):
                 vis results. Defaults to False.
             img_out_dir (str): Output directory of visualization results.
                 If left as empty, no file will be saved. Defaults to ''.
+            out_img_name (str): Output iamge name of visualization results.
+                If left as empty, file will be saved by the number. Defaults to ''.
 
         Returns:
             List[np.ndarray] or None: Returns visualization results only if
@@ -479,8 +484,11 @@ class DetInferencer(BaseInferencer):
                 img_name = osp.basename(single_input)
             elif isinstance(single_input, np.ndarray):
                 img = single_input.copy()
-                img_num = str(self.num_visualized_imgs).zfill(8)
-                img_name = f'{img_num}.jpg'
+                if out_img_name != '':
+                    img_name = f'{out_img_name}.jpg'
+                else:
+                    img_num = str(self.num_visualized_imgs).zfill(8)
+                    img_name = f'{img_num}.jpg'
             else:
                 raise ValueError('Unsupported input type: '
                                  f'{type(single_input)}')
