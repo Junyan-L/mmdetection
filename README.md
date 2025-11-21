@@ -20,6 +20,7 @@ Download pretrained data
 ```bash
 mim download mmdet --config mask-rcnn_r50-caffe_fpn_ms-poly-3x_coco --dest ./checkpoints
 ```
+Download the `solar_event_dataset_coco_v0.json` from release and place it into the `annotation` dir.
 
 Generate train and val data
 
@@ -68,7 +69,7 @@ python -u generate_coco_mask.py
 
 The default annotation boundary is not accurate, so we need to manually correct the annotation.
 
-We annotated the results by using the CVAT tools. The `annotation/solar_event_dataset_coco_v0.json` is our annotated results.
+We annotated the results by using the CVAT tools. The `solar_event_dataset_coco_v0.json` in release is our annotated results.
 
 ## Hyperparameter optimization
 The hyperparameter in DETACH is selected semi-automatically by the SMAC algorithm with the help of nni toolkit.
