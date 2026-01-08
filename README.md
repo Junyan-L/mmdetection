@@ -69,7 +69,7 @@ python -u generate_coco_mask.py
 
 The default annotation boundary is not accurate, so we need to manually correct the annotation.
 
-We annotated the results by using the CVAT tools. The `solar_event_dataset_coco_v0.json` in release is our annotated results.
+We annotated the results by using the CVAT tools. The `solar_event_dataset_coco_v0.json` in [release](https://github.com/Junyan-L/mmdetection/releases/tag/v0.1.0/) is our annotated results.
 
 ## Hyperparameter optimization
 The hyperparameter in DETACH is selected semi-automatically by the SMAC algorithm with the help of nni toolkit.
